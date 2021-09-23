@@ -20,21 +20,44 @@ import './App.css'
   }
 ];  */
 
+
+
+
+function useLocalStorage(NombreStorage, Valorinicial) {
+
+  const localStorageItem = localStorage.getItem(NombreStorage);
+  let parseItem;
+
+  if (!localStorageItem){
+    localStorage.setItem(NombreStorage, JSON.stringify(Valorinicial));
+    parseItem = Valorinicial;
+  } else {
+    parseItem = JSON.parse(localStorageItem);
+  }
+
+  const [item, setItem] = React.useState(parseItem);
+
+  const guardarItem = (nuevasItem) =>{
+    const strItem = JSON.stringify(nuevasItem);
+    localStorage.setItem(NombreStorage, strItem);
+    setItem(nuevasItem);
+  };
+
+  return [
+    item,
+    guardarItem
+  ]
+
+
+}
+
+
 const ID_STORAGE = 'TAREAS_V1';
 
 function App() {
 
-  const localStorageTareas = localStorage.getItem(ID_STORAGE);
-  let parseTareas;
-
-  if (!localStorageTareas){
-    localStorage.setItem(ID_STORAGE, JSON.stringify([]));
-    parseTareas = [];
-  } else {
-    parseTareas = JSON.parse(localStorageTareas);
-  }
-
-  const [tareas, setTareas] = React.useState(parseTareas);
+  const [tareas, guardarTareas] = useLocalStorage(ID_STORAGE, []);
+  
   const [valorTarea, setValorTarea] = React.useState('');
 
   const tareasCompletas = tareas.filter(tarea => tarea.completada === true).length;
@@ -53,11 +76,7 @@ function App() {
   }
 
 
-  const guardarCambiosTareas = (nuevasTareas) =>{
-    const strTareas = JSON.stringify(nuevasTareas);
-    localStorage.setItem(ID_STORAGE, strTareas);
-    setTareas(nuevasTareas);
-  };
+
 
   const completarTarea = (id) =>{
     const tareaindex = tareas.findIndex(tarea => tarea.id === id);
@@ -66,7 +85,7 @@ function App() {
     nuevasTareas[tareaindex].completada 
     = nuevasTareas[tareaindex].completada ? false : true;
 
-    guardarCambiosTareas(nuevasTareas);
+    guardarTareas(nuevasTareas);
   }
 
   const borrarTarea = (id) =>{
@@ -75,7 +94,7 @@ function App() {
 
     nuevasTareas.splice(tareaindex, 1);
 
-    guardarCambiosTareas(nuevasTareas);
+    guardarTareas(nuevasTareas);
   }
 
   return (
