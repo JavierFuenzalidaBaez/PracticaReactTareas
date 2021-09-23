@@ -25,28 +25,51 @@ import './App.css'
 
 function useLocalStorage(NombreStorage, Valorinicial) {
 
-  const localStorageItem = localStorage.getItem(NombreStorage);
-  let parseItem;
+  const [loading, setLoading] = React.useState(true);
+  const [error, seterror] = React.useState(false);
+  const [item, setItem] = React.useState(Valorinicial);
 
-  if (!localStorageItem){
-    localStorage.setItem(NombreStorage, JSON.stringify(Valorinicial));
-    parseItem = Valorinicial;
-  } else {
-    parseItem = JSON.parse(localStorageItem);
-  }
+  React.useEffect(() => {
+    setTimeout(() => {
+      try {
+        const localStorageItem = localStorage.getItem(NombreStorage);
+        let parseItem;
 
-  const [item, setItem] = React.useState(parseItem);
+        if (!localStorageItem){
+          localStorage.setItem(NombreStorage, JSON.stringify(Valorinicial));
+          parseItem = Valorinicial;
+        } else {
+          parseItem = JSON.parse(localStorageItem);
+        }
+
+        setItem(parseItem);
+        setLoading(false);
+      } catch(err){
+        seterror(err);
+      }
+    }, 2000)
+  });
+
+  
+
+  
 
   const guardarItem = (nuevasItem) =>{
-    const strItem = JSON.stringify(nuevasItem);
-    localStorage.setItem(NombreStorage, strItem);
-    setItem(nuevasItem);
+    try {
+      const strItem = JSON.stringify(nuevasItem);
+      localStorage.setItem(NombreStorage, strItem);
+      setItem(nuevasItem);
+    } catch(err){
+      seterror(err);
+    }
   };
 
-  return [
+  return {
     item,
-    guardarItem
-  ]
+    guardarItem,
+    loading,
+    error
+  }
 
 
 }
@@ -56,8 +79,13 @@ const ID_STORAGE = 'TAREAS_V1';
 
 function App() {
 
-  const [tareas, guardarTareas] = useLocalStorage(ID_STORAGE, []);
-  
+  const {
+    item: tareas,
+    guardarItem: guardarTareas,
+    loading,
+    error
+  } = useLocalStorage(ID_STORAGE, []);
+
   const [valorTarea, setValorTarea] = React.useState('');
 
   const tareasCompletas = tareas.filter(tarea => tarea.completada === true).length;
@@ -109,6 +137,9 @@ function App() {
 
       completarTarea={completarTarea}
       borrarTarea={borrarTarea}
+
+      loading={loading}
+      error={error}
     />
   );
 }
