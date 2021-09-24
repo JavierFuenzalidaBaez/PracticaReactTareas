@@ -1,12 +1,10 @@
 
 
 .TodoSearch {
-    background: #43C6AC;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #F8FFAE, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #F8FFAE, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-    border-radius: 2px;
-    border: 2px solid #00706b;
+    background: white; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    opacity: 0.5;
+    border-radius: 12px;
+    border: 2px solid #ffffff;
     margin: 0 auto;
     height: 64px;
     width: calc(100% - 10%);
@@ -14,7 +12,7 @@
     text-align: center;
     font-family: 'Montserrat';
     font-weight: 400;
-    color: #ffffff;
+    color: #000000;
     box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.25);
     display: flex;
     flex-direction: column;
@@ -24,11 +22,11 @@
   }
   
   .TodoSearch::placeholder {
-    color: #ffffff;
+    color: #000000;
     font-family: 'Montserrat';
     font-weight: 400;
   }
   
   .TodoSearch:focus {
-    outline-color: #c4fa61;
+    outline-color: #ff006a4b;
   }

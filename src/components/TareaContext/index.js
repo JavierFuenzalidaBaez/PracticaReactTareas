@@ -15,6 +15,7 @@ function TareaProvider(props){
       } = useLocalStorage(ID_STORAGE, []);
     
       const [valorTarea, setValorTarea] = React.useState('');
+      const [openModal, setOpenModal  ] = React.useState(false);
     
       const tareasCompletas = tareas.filter(tarea => tarea.completada === true).length;
       const totalTareas = tareas.length;
@@ -31,7 +32,23 @@ function TareaProvider(props){
         tareasFiltradas = tareas;
       }
     
-    
+      const agregarTarea = (tareaTexto) =>{
+        const nuevasTareas = [...tareas];
+
+        try {
+          const ordenada = nuevasTareas.sort(function(a,b){return parseFloat(a.id) - parseFloat(b.id)});
+          nuevasTareas.push({
+            id: ((ordenada[ordenada.length - 1].id) + 1),
+            desc: tareaTexto,
+            completada: false
+          })
+          guardarTareas(nuevasTareas); 
+        }
+        catch(err){
+          console.log(err)
+        }
+        
+      }
     
     
       const completarTarea = (id) =>{
@@ -65,9 +82,13 @@ function TareaProvider(props){
 
             completarTarea,
             borrarTarea,
+            agregarTarea,
 
             loading,
             error,
+
+            openModal,
+            setOpenModal
 
 
         }}>

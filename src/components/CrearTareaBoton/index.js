@@ -2,15 +2,19 @@ import React from "react";
 
 import './CrearTareaBoton.css'
 
-const crearTarea = () => {
-    alert('crear');
-}
 
-function CrearTareaBoton(){
+
+function CrearTareaBoton(props){
+
+    const setOpenModal = () => {
+        props.setOpenModal(!props.openModal);
+        /* props.setOpenModal(prevState => !prevState); */
+    }
+
     return(
         <button
         className="CreateTodoButton"
-        onClick={crearTarea}>
+        onClick={setOpenModal}>
             +
         </button>
     );

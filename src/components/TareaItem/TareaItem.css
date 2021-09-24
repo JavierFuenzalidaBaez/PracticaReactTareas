@@ -1,14 +1,17 @@
 .TodoItem {
-  background: #43C6AC;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #F8FFAE, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #F8FFAE, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: #c94b4b;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4b134f, #c94b4b);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4b134f, #c94b4b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 80%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   margin-top: 24px;
   box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.15);
+  border-radius: 10px;
 }
 
 .TodoItem-p {
@@ -23,6 +26,7 @@
 }
 
 .Icon {
+  color: white;
   cursor: pointer;
   display: flex;
   justify-content: center;

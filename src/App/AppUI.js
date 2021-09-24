@@ -11,6 +11,8 @@ import { TareaBuscar } from '../components/TareaBuscar';
 import { TareaListado } from '../components/TareaListado';
 import { TareaItem } from '../components/TareaItem';
 import { CrearTareaBoton } from '../components/CrearTareaBoton';
+import { TareaFormulario } from '../components/TareaFormulario';
+import { Modal } from '../components/Modal';
 
 
 function AppUI(){
@@ -20,7 +22,9 @@ function AppUI(){
       loading,
       tareasFiltradas,
       completarTarea,
-      borrarTarea
+      borrarTarea,
+      openModal,
+      setOpenModal
     } = React.useContext(TareaContext);
 
     return(
@@ -64,7 +68,17 @@ function AppUI(){
               ))}
           </TareaListado>
 
-          <CrearTareaBoton/>
+          <CrearTareaBoton
+            setOpenModal={setOpenModal}
+            openModal={openModal}
+          />
+
+          {openModal &&
+          <Modal>
+            <TareaFormulario></TareaFormulario>
+          </Modal>
+          }
+
       </div>
     </div>
     );
