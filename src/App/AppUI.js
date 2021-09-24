@@ -8,6 +8,7 @@ import './AppUI.css'
 
 import { TareasContador } from '../components/TareasContador';
 import { TareaBuscar } from '../components/TareaBuscar';
+import { TabsOpciones } from '../components/TabsOpciones';
 import { TareaListado } from '../components/TareaListado';
 import { TareaItem } from '../components/TareaItem';
 import { CrearTareaBoton } from '../components/CrearTareaBoton';
@@ -35,6 +36,8 @@ function AppUI(){
         className="contentTarea"
         >
           <TareasContador/>
+
+          <TabsOpciones/>
 
           <TareaBuscar/>
 

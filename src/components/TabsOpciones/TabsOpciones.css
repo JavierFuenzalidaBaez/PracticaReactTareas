@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    min-width: 100%;
+  }
+
+label {
+    display: inline-block;
+    padding: 6px;
+    font-weight: 600; 
+    text-align: center;
+    border-bottom: 1px solid transparent;
+    transition: all .3s ease-out 0.1s;
+    color: white;
+  }
+
+label:hover {
+    color: #ff9797; 
+    cursor: pointer;
+  }
+
+/*   input:checked + label {
+    background: #ffffff;
+    color: #fd7034;
+    border-bottom: 1px solid;
+  } */

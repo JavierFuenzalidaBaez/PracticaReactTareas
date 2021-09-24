@@ -16,9 +16,12 @@ function TareaProvider(props){
     
       const [valorTarea, setValorTarea] = React.useState('');
       const [openModal, setOpenModal  ] = React.useState(false);
-    
+      const [filtroTarea, setFiltroTarea  ] = React.useState(''); 
+
       const tareasCompletas = tareas.filter(tarea => tarea.completada === true).length;
       const totalTareas = tareas.length;
+
+
     
     
       let tareasFiltradas = [];
@@ -28,6 +31,14 @@ function TareaProvider(props){
           const tareaBuscada = valorTarea.toUpperCase();
           return tareaDesc.includes(tareaBuscada);
         });
+      } else {
+        tareasFiltradas = tareas;
+      }
+
+      if (filtroTarea === 'incompletas'){
+        tareasFiltradas = tareas.filter(tarea => tarea.completada === false);
+      } else if (filtroTarea === 'completas'){
+        tareasFiltradas = tareas.filter(tarea => tarea.completada === true);
       } else {
         tareasFiltradas = tareas;
       }
@@ -79,6 +90,8 @@ function TareaProvider(props){
             setValorTarea,
 
             tareasFiltradas,
+            filtroTarea,
+            setFiltroTarea,
 
             completarTarea,
             borrarTarea,
