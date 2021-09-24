@@ -25,6 +25,7 @@
     color: #000000;
     font-family: 'Montserrat';
     font-weight: 400;
+    opacity: 0.5;
   }
   
   .TodoSearch:focus {

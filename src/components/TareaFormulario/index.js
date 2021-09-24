@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { TareaContext } from "../TareaContext";
+
+
+
 import './TareaFormulario.css'
 
 function TareaFormulario (){
 
     const [valorTarea, setValorTarea] = useState('');
+    const [error, setError] = useState(false);
 
     const {
         agregarTarea,
@@ -20,15 +24,25 @@ function TareaFormulario (){
     }
 
     const onSubmit = (event) => {
-        event.preventDefault();
-        agregarTarea(valorTarea)
-        setOpenModal(false)
+      event.preventDefault();
+
+      if(valorTarea === ''){
+        setError(true);
+        return
+      }
+      agregarTarea(valorTarea)
+      setOpenModal(false)
+      
         
     }
     
     return(
     <form onSubmit={onSubmit} >
       <label>Escribe tu nueva tarea</label>
+      {error && 
+      <p
+      style={{color: 'yellow'}}
+      >La tarea no puede estar vacía.</p>}
       <textarea
         value = {valorTarea}
         onChange = {capturarValor}
