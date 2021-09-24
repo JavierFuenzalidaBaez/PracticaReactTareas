@@ -1,4 +1,6 @@
 import React from "react";
+import { TareaContext } from "../components/TareaContext";
+
 import MegamanCargando from '../img/loading.gif';
 import DogeAgregar from '../img/add.gif';
 import DogeError from '../img/error.gif';
@@ -11,63 +13,60 @@ import { TareaItem } from '../components/TareaItem';
 import { CrearTareaBoton } from '../components/CrearTareaBoton';
 
 
-function AppUI({
-    tareasCompletas,
-    totalTareas,
-    valorTarea,
-    setValorTarea,
-    tareasFiltradas,
-    completarTarea,
-    borrarTarea,
+function AppUI(){
 
-    loading,
-    error
-}){
+    const {
+      error,
+      loading,
+      tareasFiltradas,
+      completarTarea,
+      borrarTarea
+    } = React.useContext(TareaContext);
+
     return(
-        <React.Fragment>
-      <TareasContador 
-        tareasCompletas={tareasCompletas}
-        totalTareas={totalTareas}
-      />
+      <div
+      className="Flexdiv"
+      >
+        <div
+        className="contentTarea"
+        >
+          <TareasContador/>
 
-      <TareaBuscar
-        valorTarea={valorTarea}
-        setValorTarea={setValorTarea}
-      />
+          <TareaBuscar/>
 
-      <TareaListado>
-        {error && 
-        <>
-        <img src={DogeError} alt='error'/>
-        <p>ERROR AL CARGAR :(.</p>
-        </>
-        }
-        {loading && 
-        <>
-        <img src={MegamanCargando} alt='cargando...'/>
-        <p>CARGANDO...</p>
-        </>
-        }
-        {(!loading && !tareasFiltradas.length) && 
-        <>
-        <img src={DogeAgregar} alt='agrega nueva tarea'/>
-        <p>AGREGA UNA NUEVA TAREA.</p>
-        </>
-        }
-        
-        {tareasFiltradas.map(tarea => (
-          <TareaItem 
-          key={tarea.id} 
-          desc={tarea.desc}
-          completada={tarea.completada}
-          completarTarea={() =>completarTarea(tarea.id)}
-          borrarTarea={() =>borrarTarea(tarea.id)}/>
-        ))}
-      </TareaListado>
+          <TareaListado>
+              {error &&
+                <>
+                  <img src={DogeError} alt='error' />
+                  <p>ERROR AL CARGAR :(.</p>
+                </>
+              }
+              {loading &&
+                <>
+                  <img src={MegamanCargando} alt='cargando...' />
+                  <p>CARGANDO...</p>
+                </>
+              }
+              {(!loading && !tareasFiltradas.length && error === false) &&
+                <>
+                  <img src={DogeAgregar} alt='agrega nueva tarea' />
+                  <p>AGREGA UNA NUEVA TAREA.</p>
+                </>
+              }
 
-      <CrearTareaBoton/>
+              {tareasFiltradas.map(tarea => (
+                <TareaItem
+                  key={tarea.id}
+                  desc={tarea.desc}
+                  completada={tarea.completada}
+                  completarTarea={() => completarTarea(tarea.id)}
+                  borrarTarea={() => borrarTarea(tarea.id)} />
+              ))}
+          </TareaListado>
 
-    </React.Fragment>
+          <CrearTareaBoton/>
+      </div>
+    </div>
     );
 
 }

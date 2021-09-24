@@ -1,8 +1,14 @@
 import React from "react";
+import { TareaContext } from "../TareaContext";
 
 import './TareaBuscar.css';
 
-function TareaBuscar({ valorTarea, setValorTarea }){
+function TareaBuscar(){
+
+    const {
+        valorTarea,
+        setValorTarea
+      } = React.useContext(TareaContext);
 
     const cambiarValorTarea = (e) => {
         console.log(e.target.value);

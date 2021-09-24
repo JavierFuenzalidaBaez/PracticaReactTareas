@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Plaster&family=Wallpoet&display=swap');
+
+
 .TodoCounter {
     font-size: 24px;
     text-align: center;
     margin: 0;
     padding: 48px;
-    color: white;  /* fallback for old browsers */
+    color: white;
+    font-family: 'Plaster', cursive;
   }

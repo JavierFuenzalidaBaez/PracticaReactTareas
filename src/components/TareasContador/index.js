@@ -1,8 +1,15 @@
 import React from "react";
+import { TareaContext } from "../TareaContext";
 
 import './TareasContador.css';
 
-function TareasContador({tareasCompletas, totalTareas}){
+function TareasContador(){
+
+    const {
+        tareasCompletas,
+        totalTareas
+      } = React.useContext(TareaContext);
+
     return(
         <h2
         className="TodoCounter"
