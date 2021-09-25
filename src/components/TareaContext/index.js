@@ -47,12 +47,23 @@ function TareaProvider(props){
         const nuevasTareas = [...tareas];
 
         try {
-          const ordenada = nuevasTareas.sort(function(a,b){return parseFloat(a.id) - parseFloat(b.id)});
-          nuevasTareas.push({
-            id: ((ordenada[ordenada.length - 1].id) + 1),
-            desc: tareaTexto,
-            completada: false
-          })
+
+          if (nuevasTareas.length !== 0){
+            const ordenada = nuevasTareas.sort(function(a,b){return parseFloat(a.id) - parseFloat(b.id)});
+            nuevasTareas.push({
+              id: ((ordenada[ordenada.length - 1].id) + 1),
+              desc: tareaTexto,
+              completada: false
+            })
+          } else {
+            nuevasTareas.push({
+              id: 1,
+              desc: tareaTexto,
+              completada: false
+            })
+          }
+
+
           guardarTareas(nuevasTareas); 
         }
         catch(err){
